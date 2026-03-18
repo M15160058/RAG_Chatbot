@@ -1,8 +1,8 @@
-from typing import List, Optional
+from typing import List
 
 from langchain.agents import create_agent
+from langchain.tools import Tool
 from langchain_core.documents import Document
-from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.tools import tool
 from langchain_community.utilities import WikipediaAPIWrapper
 
@@ -40,11 +40,14 @@ class RAGNodes:
         format_docs = self._format_docs
         wiki_api = WikipediaAPIWrapper(top_k_results=3, lang="en")
 
-        @tool
-        def retriever_tool(query: str) -> str:
-            """Search the indexed private document collection for relevant passages."""
-            docs = retriever.invoke(query)
-            return format_docs(docs)
+        retriever_tool = Tool(
+            name="retriever_tool",
+            description=(
+                "Search the user's documents, including website content, "
+                "publications, resume/CV, and research or professional background."
+            ),
+            func=lambda query: format_docs(retriever.invoke(query)),
+        )
 
         @tool
         def wikipedia_tool(query: str) -> str:
@@ -55,11 +58,29 @@ class RAGNodes:
             model=self.llm,
             tools=[retriever_tool, wikipedia_tool],
             system_prompt=(
-                "You are a helpful RAG assistant. "
-                "Use retriever_tool first for questions about the user's documents, "
-                "website, resume, or publications. "
-                "Use wikipedia_tool only for general background knowledge. "
-                "If the documents do not contain the answer, say so clearly."
+                "You are a retrieval-augmented assistant (RAG).\n\n"
+                "RULES:\n"
+                "1. Use retriever_tool first for any question related to:\n"
+                "   - the user's website\n"
+                "   - publications\n"
+                "   - resume / CV\n"
+                "   - research or professional background\n\n"
+                "2. Base your answer on retrieved content whenever available.\n"
+                "   Do not invent information.\n\n"
+                "3. Use wikipedia_tool only for general knowledge questions\n"
+                "   that are not answered by the user's documents.\n\n"
+                "4. If the user's documents do not contain the answer, say clearly:\n"
+                "   'I could not find this information in the provided documents.'\n\n"
+                "5. When answering:\n"
+                "   - be concise and clear\n"
+                "   - summarize retrieved content\n"
+                "   - avoid copying long raw passages\n\n"
+                "6. For publications:\n"
+                "   - summarize key publications\n"
+                "   - group by year when possible\n\n"
+                "7. For research or profile questions:\n"
+                "   - use resume or website content\n"
+                "   - provide a professional summary\n"
             ),
         )
 
@@ -76,7 +97,7 @@ class RAGNodes:
                         "role": "system",
                         "content": (
                             "Use the provided retrieved context first. "
-                            "Call tools only when needed."
+                            "Only call tools if the context is insufficient."
                         ),
                     },
                     {
