@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 from src.config.config import Config
@@ -25,7 +25,10 @@ def startup_event():
         chunk_size=Config.CHUNK_SIZE,
         chunk_overlap=Config.CHUNK_OVERLAP,
     )
+
     documents = doc_processor.process_data_folder("data")
+    if not documents:
+        raise ValueError("No documents found in data folder.")
 
     vector_store = VectorStore()
     vector_store.create_vectorstore(documents)
@@ -46,8 +49,19 @@ def root():
 
 @app.post("/chat")
 def chat(request: ChatRequest):
+    if rag_system is None:
+        raise HTTPException(status_code=500, detail="RAG system not initialized")
+
     result = rag_system.run(request.question)
+
     return {
         "question": request.question,
         "answer": result["answer"],
+        "retrieved_docs": [
+            {
+                "source": doc.metadata.get("source", "unknown"),
+                "content": doc.page_content[:300],
+            }
+            for doc in result.get("retrieved_docs", [])
+        ],
     }
