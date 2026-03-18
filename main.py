@@ -47,6 +47,11 @@ def root():
     return {"message": "RAG API is running"}
 
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+
 @app.post("/chat")
 def chat(request: ChatRequest):
     if rag_system is None:
