@@ -14,6 +14,7 @@ from langchain_community.document_loaders import (
     CSVLoader,
     UnstructuredMarkdownLoader,
     UnstructuredHTMLLoader,
+    UnstructuredURLLoader,
 )
 
 
@@ -28,9 +29,9 @@ class DocumentProcessor:
             chunk_overlap=chunk_overlap,
         )
 
+  
     def load_from_url(self, url: str) -> List[Document]:
-        """Load document(s) from a URL."""
-        loader = WebBaseLoader(url)
+        loader = UnstructuredURLLoader(urls=[url])
         return loader.load()
 
     def load_from_url_file(self, file_path: Union[str, Path]) -> List[Document]:
