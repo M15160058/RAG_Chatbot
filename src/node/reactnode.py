@@ -40,14 +40,11 @@ class RAGNodes:
         format_docs = self._format_docs
         wiki_api = WikipediaAPIWrapper(top_k_results=3, lang="en")
 
-        retriever_tool = Tool(
-            name="retriever_tool",
-            description=(
-                "Search the user's documents, including website content, "
-                "publications, resume/CV, and research or professional background."
-            ),
-            func=lambda query: format_docs(retriever.invoke(query)),
-        )
+        @tool
+        def retriever_tool(query: str) -> str:
+            """Search the user's documents, including website content, publications, resume/CV, and research background."""
+            docs = retriever.invoke(query)
+            return format_docs(docs)
 
         @tool
         def wikipedia_tool(query: str) -> str:
