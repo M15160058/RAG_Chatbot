@@ -3,7 +3,6 @@ from typing import List
 from langchain.agents import create_agent
 from langchain.tools import Tool
 from langchain_core.documents import Document
-from langchain_core.tools import tool
 from langchain_community.utilities import WikipediaAPIWrapper
 
 from src.state.rag_state import RAGState
