@@ -1,0 +1,22 @@
+My skills:
+
+1.Computational Modeling & Simulation
+    • Molecular Dynamics: GROMACS, LAMMPS, Protein & Polymer Simulations, All-Atom Simulations
+    • Gaussian (DFT), Vitrimer Modeling, Basic Molecular Docking
+2.Machine Learning & AI
+    • Supervised & Unsupervised Learning, Regression, Classification, Clustering (K-means, Hierarchical), Dimensionality Reduction (PCA), Ensemble & Tree-based Models (Random Forest, XGBoost), Model Evaluation
+    • Deep Learning: TensorFlow, Neural Networks (CNNs, RNNs, GNNs), NLP
+    • Generative AI & LLMs: LangChain, LangGraph, Agentic RAG, AI Chatbots, Multi-Agent Systems, Voice Agents (ElevenLabs)
+3.Cheminformatics & Bioinformatics
+    • QSAR Modeling, Molecular Property Prediction, RDKit, SMILES Processing, Molecular Fingerprinting, Virtual Screening
+    • DNA/RNA-Seq (NGS) Analysis, Mutation Prediction, Disease Classification, Genomic Data Processing
+4.Data Engineering & Automation
+    • Web Scraping & Automation: BeautifulSoup, Selenium, Scrapy, Playwright, n8n
+    • Data Pipelines: End-to-end ML pipeline development, data extraction, cleaning, preprocessing
+5.Cloud, APIs & Deployment
+    • Docker, FastAPI, REST APIs, Streamlit
+    • AWS & Azure deployment
+6.Programming & Scientific Computing
+    • Python (NumPy, SciPy, Pandas), R, SQL
+7.DevOps & Collaboration
+    • Git, GitHub

@@ -1,0 +1,8 @@
+Other Experience					
+    1.Hands-on experience in drug discovery and predictive modeling through Udemy course projects, applying QSAR and Graph Neural Networks on small datasets. Developed Python ML pipelines for molecular property prediction and bioinformatics applications, including DNA sequence analysis, RNA-Seq (NGS), and disease classification.
+    2.Hands-on experience with TensorFlow through course-based projects (Udemy), including building, training, and evaluating neural networks for classification and representation learning tasks using Python.
+    3.Practical training in machine learning methods including linear and logistic regression, classification, clustering (k-means, hierarchical), dimensionality reduction (PCA), tree-based models (Random Forest, XGBoost), clustering, and model evaluation techniques, as part of a PhD-level data science course, with hands-on implementation using Python and scikit-learn.
+    4.Hands-on experience building a personal RAG-based AI chatbot through a Udemy course, leveraging LLMs, LangChain, LangGraph, ElevenLabs, Agentic RAG, and MCP for end-to-end conversational AI workflows.
+    5.Hands-on experience building FastAPI applications in local development environments through course-based projects (Udemy), including creating REST endpoints, routing, request/response handling, and testing API workflows.
+    6.Developed Python-based web scraping scripts (BeautifulSoup, Selenium, Scrapy) to extract and clean large datasets.
+    7.Designed, customized, and implemented HTML, CSS, PHP, and jQuery to build responsive, SEO-friendly, client-specific WordPress themes.
